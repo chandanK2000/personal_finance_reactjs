@@ -139,7 +139,7 @@ function Navbar() {
                                         className="nav-btn"
                                         onClick={handleLogout}
                                     >
-                                        Logout
+                                        Logout From Here
                                     </Button>
                                 </>
                             )}
