@@ -1,0 +1,229 @@
+/* ===== Base ===== */
+.cookies-page {
+    background: #f8f9fc;
+    overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.cookies-hero {
+    padding: 5rem 0 3rem;
+    background: linear-gradient(135deg, #eef4ff 0%, #f8f9fc 100%);
+}
+
+.cookies-hero-content {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.cookies-badge {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    border: 1px solid #dbe6ff;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.08);
+}
+
+.cookies-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1a1d29;
+    margin-bottom: 1.25rem;
+}
+
+.cookies-title span {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cookies-subtitle {
+    font-size: 1.1rem;
+    color: #5a6478;
+    line-height: 1.7;
+    max-width: 620px;
+    margin: 0 auto 0.75rem;
+}
+
+.cookies-updated {
+    color: #8a93a6;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ===== CONTENT ===== */
+.cookies-content-section {
+    padding: 4rem 0 5rem;
+    background: #ffffff;
+}
+
+.cookies-body {
+    background: #ffffff;
+}
+
+.cookies-block {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eef0f3;
+    scroll-margin-top: 90px;
+}
+
+.cookies-block:last-of-type {
+    border-bottom: none;
+}
+
+.cookies-block-title {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a1d29;
+    margin-bottom: 1rem;
+    line-height: 1.35;
+}
+
+.cookies-block-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.cookies-text {
+    color: #5a6478;
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 0.85rem;
+}
+
+.cookies-list {
+    padding-left: 1.25rem;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.cookies-list li {
+    color: #5a6478;
+    font-size: 0.97rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+}
+
+.cookies-list li::marker {
+    color: #0d6efd;
+    font-weight: 700;
+}
+
+.cookies-note {
+    background: #f5f8ff;
+    border-left: 4px solid #0d6efd;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+}
+
+.cookies-note p {
+    color: #4b5563;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.cookies-note strong {
+    color: #0d6efd;
+}
+
+/* ===== CTA ===== */
+.cookies-cta-section {
+    padding: 0 0 5rem;
+    background: #ffffff;
+}
+
+.cookies-cta-box {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    border-radius: 20px;
+    padding: 3.5rem 2rem;
+    color: #ffffff;
+    box-shadow: 0 20px 50px rgba(13, 110, 253, 0.28);
+}
+
+.cta-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+
+.cta-subtitle {
+    font-size: 1.05rem;
+    opacity: 0.92;
+    margin-bottom: 1.75rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-btn-light {
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    color: #0d6efd;
+    transition: all 0.25s ease;
+}
+
+.cta-btn-light:hover {
+    transform: translateY(-2px);
+    color: #0a58ca;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cta-btn-outline {
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.cta-btn-outline:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 991.98px) {
+    .cookies-title {
+        font-size: 2.1rem;
+    }
+
+    .cta-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .cookies-hero {
+        padding: 3rem 0 2rem;
+    }
+
+    .cookies-title {
+        font-size: 1.75rem;
+    }
+
+    .cookies-subtitle {
+        font-size: 1rem;
+    }
+
+    .cookies-block-title {
+        font-size: 1.15rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-buttons .btn {
+        width: 100%;
+    }
+}
