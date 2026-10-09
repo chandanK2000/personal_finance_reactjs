@@ -1,22 +1,35 @@
 
-
-
 import { useState } from "react";
-import { Modal, Button, Form, Alert, Spinner } from "react-bootstrap";
+import {
+    Modal,
+    Button,
+    Form,
+    Alert,
+    Spinner
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import API from "../../../services/api";
 
-const LoginModal = ({ show, onHide, onSwitchToRegister }) => {
-
+const LoginModal = ({
+    show,
+    onHide,
+    onSwitchToRegister
+}) => {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    const handleClose = () => {
+        if (loading) return;
+
+        setError("");
+        onHide();
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,81 +38,82 @@ const LoginModal = ({ show, onHide, onSwitchToRegister }) => {
         setLoading(true);
 
         try {
-
             const response = await axios.post(
                 API.login_api,
                 {
-                    email,
+                    email: email.trim(),
                     password
                 }
             );
 
-            console.log("Login response:", response.data);
+            const data = response.data;
 
-            if (response.data.success) {
-
-                console.log("Login successful");
-
-                localStorage.setItem(
-                    "accessToken",
-                    response.data.token
-                );
-
-                localStorage.setItem(
-                    "userDetails",
-                    JSON.stringify(response.data.user)
-                );
-
-                // Tell Navbar that login was successful
-                window.dispatchEvent(new Event("loginSuccess"));
-
-                onHide();
-
-                navigate("/dashboard");
-
-            } else {
-
-                setError(
-                    response.data.message || "Login failed"
-                );
-
+            if (!data.success) {
+                setError(data.message || "Login failed.");
+                return;
             }
 
-        } catch (error) {
+            if (!data.token || !data.user) {
+                setError("Invalid login response from server.");
+                return;
+            }
 
-            console.error("Login error:", error);
-
-            setError(
-                error.response?.data?.message ||
-                "Unable to login. Please try again."
+            // Store authentication details
+            localStorage.setItem(
+                "accessToken",
+                data.token
             );
 
+            localStorage.setItem(
+                "userDetails",
+                JSON.stringify(data.user)
+            );
+
+            // Notify the Navbar and other listening components
+            window.dispatchEvent(
+                new Event("loginSuccess")
+            );
+
+            // Close modal and open authenticated area
+            onHide();
+
+            navigate("/dashboard", {
+                replace: true
+            });
+
+        } catch (err) {
+            console.error("Login error:", err);
+
+            setError(
+                err.response?.data?.message ||
+                "Unable to login. Please try again."
+            );
         } finally {
-
             setLoading(false);
-
         }
     };
 
     return (
         <Modal
             show={show}
-            onHide={onHide}
+            onHide={handleClose}
             centered
             backdrop="static"
+            keyboard={!loading}
             className="auth-modal"
         >
-
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={!loading}>
                 <Modal.Title>Login</Modal.Title>
             </Modal.Header>
 
             <Form onSubmit={handleSubmit}>
-
                 <Modal.Body>
-
                     {error && (
-                        <Alert variant="danger">
+                        <Alert
+                            variant="danger"
+                            dismissible
+                            onClose={() => setError("")}
+                        >
                             {error}
                         </Alert>
                     )}
@@ -114,12 +128,14 @@ const LoginModal = ({ show, onHide, onSwitchToRegister }) => {
 
                         <Form.Control
                             type="email"
-                            placeholder="Enter email"
+                            placeholder="Enter your email"
                             value={email}
                             onChange={(e) =>
                                 setEmail(e.target.value)
                             }
+                            autoComplete="username"
                             required
+                            disabled={loading}
                         />
                     </Form.Group>
 
@@ -133,28 +149,33 @@ const LoginModal = ({ show, onHide, onSwitchToRegister }) => {
 
                         <Form.Control
                             type="password"
-                            placeholder="Password"
+                            placeholder="Enter your password"
                             value={password}
                             onChange={(e) =>
                                 setPassword(e.target.value)
                             }
+                            autoComplete="current-password"
                             required
+                            disabled={loading}
                         />
                     </Form.Group>
 
                     <div className="text-end">
-                        <a
-                            href="#forgot"
-                            className="small text-decoration-none"
+                        <button
+                            type="button"
+                            className="btn btn-link p-0 small text-decoration-none"
+                            onClick={() =>
+                                setError(
+                                    "Forgot password functionality is not connected yet."
+                                )
+                            }
                         >
                             Forgot password?
-                        </a>
+                        </button>
                     </div>
-
                 </Modal.Body>
 
                 <Modal.Footer className="d-flex justify-content-between">
-
                     <span className="small">
                         Don't have an account?{" "}
 
@@ -162,16 +183,16 @@ const LoginModal = ({ show, onHide, onSwitchToRegister }) => {
                             type="button"
                             className="btn btn-link p-0 align-baseline"
                             onClick={onSwitchToRegister}
+                            disabled={loading}
                         >
                             Register
                         </button>
                     </span>
 
                     <div>
-
                         <Button
                             variant="secondary"
-                            onClick={onHide}
+                            onClick={handleClose}
                             className="me-2"
                             disabled={loading}
                         >
@@ -183,7 +204,6 @@ const LoginModal = ({ show, onHide, onSwitchToRegister }) => {
                             type="submit"
                             disabled={loading}
                         >
-
                             {loading ? (
                                 <>
                                     <Spinner
@@ -191,21 +211,15 @@ const LoginModal = ({ show, onHide, onSwitchToRegister }) => {
                                         animation="border"
                                         className="me-2"
                                     />
-
                                     Logging in...
                                 </>
                             ) : (
                                 "Login"
                             )}
-
                         </Button>
-
                     </div>
-
                 </Modal.Footer>
-
             </Form>
-
         </Modal>
     );
 };

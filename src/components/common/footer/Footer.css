@@ -1,44 +1,51 @@
-/* ===== Footer Base ===== */
+/* =========================================================
+   FOOTER  (Footer.css)
+   ========================================================= */
+
+/* ---------- Base ---------- */
 .app-footer {
-    background: linear-gradient(180deg, #1a1d29 0%, #0f111a 100%);
-    color: #b8bcc8;
-    padding: 4rem 0 1.5rem;
     margin-top: auto;
+    padding: 4rem 0 1.5rem;
+    color: #b8bcc8;
     font-size: 0.92rem;
+    line-height: 1.65;
+    background: linear-gradient(180deg, #1a1d29 0%, #0f111a 100%);
 }
 
-/* ===== Top Section ===== */
+/* ---------- Top Section ---------- */
 .footer-top {
     padding-bottom: 2.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ===== Brand ===== */
+/* ---------- Brand ---------- */
 .footer-brand {
     display: inline-block;
+    margin-bottom: 0.9rem;
+    color: #ffffff !important;
     font-size: 1.4rem;
     font-weight: 800;
-    color: #ffffff !important;
-    text-decoration: none;
-    margin-bottom: 0.9rem;
     letter-spacing: 0.3px;
+    text-decoration: none;
     transition: color 0.25s ease;
 }
 
-.footer-brand:hover {
-    color: #6ea8fe !important;
+.footer-brand:hover,
+.footer-brand:focus-visible {
+    color: #a5b4fc !important;
 }
 
 .footer-tagline {
+    max-width: 340px;
+    margin-bottom: 1.25rem;
     color: #8a90a2;
     line-height: 1.65;
-    margin-bottom: 1.25rem;
-    max-width: 340px;
 }
 
-/* ===== Social Icons ===== */
+/* ---------- Social Icons ---------- */
 .footer-social {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.6rem;
 }
 
@@ -48,35 +55,37 @@
     justify-content: center;
     width: 38px;
     height: 38px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.06);
     color: #b8bcc8;
-    transition: all 0.25s ease;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
     text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease,
+                transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.social-icon:hover {
-    background: linear-gradient(135deg, #0d6efd, #6610f2);
+.social-icon:hover,
+.social-icon:focus-visible {
     color: #ffffff;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
     transform: translateY(-3px);
-    box-shadow: 0 8px 18px rgba(13, 110, 253, 0.35);
+    box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
 }
 
-/* ===== Headings ===== */
+/* ---------- Headings ---------- */
 .footer-heading {
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
     margin-bottom: 1.1rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
 }
 
-/* ===== Links ===== */
+/* ---------- Links ---------- */
 .footer-links {
-    list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .footer-links li {
@@ -84,22 +93,23 @@
 }
 
 .footer-links a {
+    display: inline-block;
+    padding-left: 0;
     color: #8a90a2;
     text-decoration: none;
-    transition: all 0.2s ease;
-    position: relative;
-    padding-left: 0;
+    transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
-.footer-links a:hover {
-    color: #6ea8fe;
+.footer-links a:hover,
+.footer-links a:focus-visible {
     padding-left: 6px;
+    color: #a5b4fc;
 }
 
-/* ===== Newsletter ===== */
+/* ---------- Newsletter ---------- */
 .footer-newsletter-text {
-    color: #8a90a2;
     margin-bottom: 1rem;
+    color: #8a90a2;
     line-height: 1.6;
 }
 
@@ -109,11 +119,13 @@
 }
 
 .footer-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0.6rem 0.9rem !important;
+    color: #ffffff !important;
     background: rgba(255, 255, 255, 0.06) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
     border-radius: 8px !important;
-    padding: 0.6rem 0.9rem !important;
 }
 
 .footer-input::placeholder {
@@ -122,41 +134,45 @@
 
 .footer-input:focus {
     background: rgba(255, 255, 255, 0.08) !important;
-    border-color: #0d6efd !important;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2) !important;
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25) !important;
 }
 
 .footer-subscribe-btn {
-    border-radius: 8px !important;
     padding: 0.6rem 1.2rem !important;
     font-weight: 600 !important;
     white-space: nowrap;
-    transition: all 0.25s ease;
+    border-radius: 8px !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease,
+                background-color 0.25s ease, border-color 0.25s ease;
 }
 
-.footer-subscribe-btn:hover {
+.footer-subscribe-btn:hover,
+.footer-subscribe-btn:focus-visible {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
 }
 
 .footer-cta-btn {
-    border-radius: 8px !important;
     padding: 0.55rem 1.15rem !important;
     font-weight: 600 !important;
-    transition: all 0.25s ease;
+    border-radius: 8px !important;
+    transition: transform 0.25s ease, background-color 0.25s ease,
+                color 0.25s ease, border-color 0.25s ease;
 }
 
-.footer-cta-btn:hover {
-    transform: translateY(-1px);
+.footer-cta-btn:hover,
+.footer-cta-btn:focus-visible {
+    color: #4f46e5 !important;
     background: #ffffff !important;
-    color: #0d6efd !important;
+    transform: translateY(-1px);
 }
 
-/* ===== Bottom Bar ===== */
+/* ---------- Bottom Bar ---------- */
 .footer-bottom {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
     padding-top: 1.75rem;
@@ -173,25 +189,36 @@
 }
 
 .footer-legal {
-    list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 .footer-legal a {
     color: #6b7280;
-    text-decoration: none;
     font-size: 0.88rem;
+    text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.footer-legal a:hover {
-    color: #6ea8fe;
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+    color: #a5b4fc;
 }
 
-/* ===== Responsive ===== */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1199.98px) {
+    .footer-tagline {
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 991.98px) {
     .app-footer {
         padding: 3rem 0 1.25rem;
@@ -200,14 +227,23 @@
     .footer-top {
         padding-bottom: 2rem;
     }
+
+    .footer-heading {
+        margin-top: 0.5rem;
+    }
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 767.98px) {
+    .footer-brand {
+        font-size: 1.25rem;
+    }
+
     .footer-newsletter {
         flex-direction: column;
     }
 
-    .footer-subscribe-btn {
+    .footer-subscribe-btn,
+    .footer-cta-btn {
         width: 100%;
     }
 
@@ -218,7 +254,48 @@
 
     .footer-legal {
         justify-content: center;
-        flex-wrap: wrap;
         gap: 1rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .app-footer {
+        padding: 2.5rem 0 1rem;
+        font-size: 0.88rem;
+    }
+
+    .footer-social {
+        gap: 0.5rem;
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .footer-legal {
+        gap: 0.75rem 1.25rem;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-brand,
+    .social-icon,
+    .footer-links a,
+    .footer-input,
+    .footer-subscribe-btn,
+    .footer-cta-btn,
+    .footer-legal a {
+        transition: none !important;
+    }
+
+    .social-icon:hover,
+    .footer-subscribe-btn:hover,
+    .footer-cta-btn:hover {
+        transform: none !important;
     }
 }

@@ -1,46 +1,836 @@
+/* =========================================================
+   MAIN NAVBAR
+   ========================================================= */
 
-/* ===== Auth Modal Styling ===== */
-.auth-modal .modal-content {
-    border-radius: 14px;
+.app-navbar {
+    position: fixed !important;
+    top: 0;
+    z-index: 1030;
+    width: 100%;
+    padding: 12px 0;
+    right: 0;
+    left: 250;
+    background: #ffffff;
+    border-bottom: 1px solid #e9edf5;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+}
+
+.app-navbar .navbar-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.app-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+    color: #172033;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.app-brand:hover,
+.app-brand:focus {
+    color: #172033;
+}
+
+.brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    color: #ffffff;
+    font-size: 1.15rem;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    border-radius: 13px;
+    box-shadow: 0 5px 12px rgba(79, 70, 229, 0.2);
+}
+
+.brand-text {
+    white-space: nowrap;
+}
+
+.brand-text span {
+    color: #4f46e5;
+    margin-left: 2px;
+}
+
+/* =========================================================
+   INLINE EXPANDING SEARCH (desktop base)
+   ========================================================= */
+
+.navbar-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    height: 42px;
+    width: 42px;
+    flex-shrink: 0;
+
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 11px;
+
+    overflow: hidden;
+
+    transition: width 0.3s ease,
+                background-color 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.navbar-search.open {
+    width: 340px;
+    background: #f5f7fb;
+    border-color: #e5e9f2;
+}
+
+.navbar-search.open:focus-within {
+    background: #ffffff;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+/* ---------- Toggle button (closed state) ---------- */
+.navbar-search-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
     border: none;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    background: transparent;
+
+    color: #64748b;
+    font-size: 1rem;
+    cursor: pointer;
+
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.auth-modal .modal-header {
-    border-bottom: 1px solid #eef0f3;
-    padding: 1.1rem 1.5rem;
+.navbar-search-toggle:hover,
+.navbar-search-toggle:focus-visible {
+    color: #4f46e5;
+    background: #f3f4ff;
+    outline: none;
+    border-radius: 10px;
 }
 
-.auth-modal .modal-title {
-    font-weight: 700;
-    color: #0d6efd;
+/* Hide toggle whenever search is open */
+.navbar-search.open .navbar-search-toggle {
+    display: none;
 }
 
-.auth-modal .modal-body {
-    padding: 1.5rem;
+/* ---------- Form (open state) ---------- */
+.navbar-search-form {
+    display: none;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
-.auth-modal .modal-footer {
-    border-top: 1px solid #eef0f3;
-    padding: 1rem 1.5rem;
-    background: #fafbfc;
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
+.navbar-search.open .navbar-search-form {
+    display: flex;
 }
 
-.auth-modal .form-label {
-    font-weight: 600;
-    color: #333;
+.navbar-search-prefix {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    flex-shrink: 0;
+    margin-left: 14px;
+
+    color: #94a3b8;
     font-size: 0.9rem;
+    pointer-events: none;
 }
 
-.auth-modal .form-control {
+.navbar-search-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 0 8px 0 10px !important;
+    margin: 0;
+
+    color: #1f2937 !important;
+    background: transparent !important;
+
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+
+    font-size: 0.9rem !important;
+}
+
+.navbar-search-input::placeholder {
+    color: #9aa4b8 !important;
+}
+
+.navbar-search-input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.navbar-search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    margin-right: 5px;
+
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+
+    color: #94a3b8;
+    font-size: 0.82rem;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-search-close:hover,
+.navbar-search-close:focus-visible {
+    color: #4f46e5;
+    background: #e5e9f2;
+    outline: none;
+}
+
+/* =========================================================
+   NAVBAR ACTIONS (public navbar)
+   ========================================================= */
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.nav-login-btn,
+.nav-register-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 42px;
+    padding: 9px 18px;
+
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                transform 0.2s ease;
+}
+
+.nav-login-btn {
+    color: #374151;
+    border: 1px solid transparent;
+}
+
+.nav-login-btn:hover,
+.nav-login-btn:focus {
+    color: #4f46e5;
+    background: #f3f4ff;
+}
+
+.nav-register-btn {
+    color: #ffffff;
+    background: #4f46e5;
+    border: 1px solid #4f46e5;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.15);
+}
+
+.nav-register-btn:hover,
+.nav-register-btn:focus {
+    color: #ffffff;
+    background: #4338ca;
+    border-color: #4338ca;
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.22);
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   PROFILE DROPDOWN
+   ========================================================= */
+
+.profile-dropdown {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.profile-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 5px 14px 5px 5px;
+
+    color: #1f2937;
+    background: #f5f7fb;
+    border: 1px solid #e5e9f2;
+    border-radius: 999px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.profile-toggle:hover,
+.profile-toggle:focus,
+.profile-toggle.show {
+    color: #4338ca;
+    background: #eef2ff;
+    border-color: #c7d2fe;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
+}
+
+.profile-toggle::after {
+    margin-left: 2px;
+    color: #94a3b8;
+}
+
+.profile-toggle-text {
+    white-space: nowrap;
+}
+
+.user-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    border-radius: 50%;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* =========================================================
+   PROFILE MENU
+   ========================================================= */
+
+.profile-menu {
+    min-width: 290px;
+    margin-top: 10px !important;
+    padding: 8px;
+
+    background: #ffffff;
+    border: 1px solid #e9edf5;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.profile-menu-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+
+    background: linear-gradient(135deg, #eef2ff, #f5f7fb);
+    border-radius: 10px;
+}
+
+.profile-menu-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    border-radius: 50%;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+}
+
+.profile-menu-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.profile-menu-name {
+    color: #1f2937;
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-menu-email {
+    color: #6b7280;
+    font-size: 0.78rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-menu-role {
+    align-self: flex-start;
+    margin-top: 3px;
+    padding: 2px 9px;
+
+    color: #4338ca;
+    background: #e0e7ff;
+    border-radius: 999px;
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: capitalize;
+}
+
+.profile-menu .dropdown-divider {
+    margin: 8px 4px;
+    border-color: #eef2f7;
+}
+
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 10px 12px;
+
+    color: #374151;
+    background: transparent;
     border-radius: 8px;
-    padding: 0.6rem 0.9rem;
-    border: 1px solid #dde1e7;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.auth-modal .form-control:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+.profile-menu-item:hover,
+.profile-menu-item:focus {
+    color: #4338ca;
+    background: #f3f4ff;
+}
+
+.profile-menu-icon {
+    width: 16px;
+    color: #6b7280;
+    font-size: 0.92rem;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+}
+
+.profile-menu-item:hover .profile-menu-icon,
+.profile-menu-item:focus .profile-menu-icon {
+    color: #4338ca;
+}
+
+.profile-menu-logout {
+    color: #dc2626;
+}
+
+.profile-menu-logout:hover,
+.profile-menu-logout:focus {
+    color: #b91c1c;
+    background: #fef2f2;
+}
+
+.profile-menu-logout .profile-menu-icon {
+    color: #dc2626;
+}
+
+.profile-menu-logout:hover .profile-menu-icon,
+.profile-menu-logout:focus .profile-menu-icon {
+    color: #b91c1c;
+}
+
+/* =========================================================
+   MOBILE TOGGLE (public navbar only)
+   ========================================================= */
+
+.app-toggle {
+    padding: 7px 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    box-shadow: none !important;
+    margin-left: auto;
+}
+
+.app-toggle:focus {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
+}
+
+/* =========================================================
+   COMPACT NAVBAR — inside AppLayout
+   ========================================================= */
+
+.app-navbar-compact {
+    position: relative;       /* anchor for mobile overlay */
+    padding: 0;
+    background: #ffffff;
+}
+
+.app-navbar-compact .navbar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 8px 20px;
+}
+
+/* Brand — mobile / tablet only */
+.brand-compact {
+    margin-right: auto;
+    font-size: 1.05rem;
+    gap: 9px;
+    min-width: 0;
+}
+
+.brand-compact .brand-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.brand-compact .brand-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    border-radius: 11px;
+}
+
+/* Right cluster */
+.navbar-right-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Icon buttons (hamburger) */
+.navbar-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+
+    color: #64748b;
+    font-size: 1rem;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.navbar-icon-btn:hover,
+.navbar-icon-btn:focus-visible {
+    color: #4f46e5;
+    background: #f3f4ff;
+    border-color: #e0e7ff;
+    outline: none;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 1199.98px) {
+    .navbar-search.open {
+        width: 300px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    /* ---------- Public navbar ---------- */
+    .app-navbar .navbar-container {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .app-navbar .navbar-collapse {
+        flex-basis: 100%;
+        padding-top: 12px;
+    }
+
+    .navbar-actions {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px;
+        width: 100%;
+        padding-bottom: 8px;
+    }
+
+    .nav-login-btn,
+    .nav-register-btn {
+        width: 100%;
+        justify-content: center;
+    }
+@media (max-width: 991.98px) {
+    .profile-menu {
+        position: fixed !important;
+        top: 60px !important;
+        right: 12px !important;
+        left: auto !important;
+        width: calc(100vw - 24px) !important;
+        max-width: 300px !important;
+        min-width: 0 !important;
+        transform: none !important;
+        margin: 0 !important;
+    }
+}
+    /* ---------- Compact navbar: search becomes full-width overlay ---------- */
+
+    /* Disable inline transition — overlay uses its own animation */
+    .app-navbar-compact .navbar-search {
+        transition: none;
+    }
+
+    .app-navbar-compact .navbar-search.open {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+
+        width: auto;
+        height: auto;
+        max-width: none;
+
+        padding: 8px 16px;
+
+        background: #ffffff;
+        border: none;
+        border-radius: 0;
+
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+
+        display: flex;
+        align-items: center;
+
+        animation: searchOverlayIn 0.18s ease;
+        overflow: visible;
+        box-sizing: border-box;
+    }
+
+    @keyframes searchOverlayIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* The overlay form fills the whole strip */
+    .app-navbar-compact .navbar-search.open .navbar-search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        width: 100%;
+        height: 100%;
+
+        padding: 0 6px 0 14px;
+
+        background: #f5f7fb;
+        border: 1px solid #e5e9f2;
+        border-radius: 11px;
+
+        box-sizing: border-box;
+        transition: background-color 0.2s ease,
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+    }
+
+    .app-navbar-compact .navbar-search.open .navbar-search-form:focus-within {
+        background: #ffffff;
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+
+    .app-navbar-compact .navbar-search.open .navbar-search-prefix {
+        margin-left: 0;
+    }
+
+    .app-navbar-compact .navbar-search.open .navbar-search-input {
+        padding: 0 !important;
+        height: 100% !important;
+        font-size: 0.92rem !important;
+    }
+
+    /* Avatar-only profile toggle */
+    .app-navbar-compact .profile-toggle {
+        padding: 3px;
+        border-radius: 50%;
+        background: transparent;
+        border-color: transparent;
+    }
+
+    .app-navbar-compact .profile-toggle-text,
+    .app-navbar-compact .profile-toggle::after {
+        display: none;
+    }
+
+    .app-navbar-compact .profile-toggle:hover,
+    .app-navbar-compact .profile-toggle:focus,
+    .app-navbar-compact .profile-toggle.show {
+        background: #f3f4ff;
+        border-color: #e0e7ff;
+    }
+
+    .app-navbar-compact .user-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .app-navbar-compact .navbar-container {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .brand-compact {
+        font-size: 1rem;
+    }
+
+    .brand-compact .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+
+    .navbar-icon-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+    }
+
+    .app-navbar-compact .user-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+    }
+
+    .app-navbar-compact .navbar-search.open {
+        padding: 6px 12px;
+    }
+
+    .app-navbar-compact .navbar-search.open .navbar-search-form {
+        height: 40px;
+        padding: 0 4px 0 12px;
+    }
+
+    .app-navbar-compact .navbar-search.open .navbar-search-input {
+        font-size: 0.86rem !important;
+    }
+
+    /* Public navbar */
+    .app-brand {
+        gap: 8px;
+        font-size: 1.05rem;
+    }
+
+    .brand-icon {
+        width: 37px;
+        height: 37px;
+        border-radius: 11px;
+        font-size: 1rem;
+    }
+
+    .profile-menu {
+        min-width: 100%;
+    }
+
+    .profile-menu-avatar {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar-search,
+    .navbar-search-close,
+    .navbar-search-toggle,
+    .navbar-icon-btn,
+    .nav-login-btn,
+    .nav-register-btn,
+    .profile-toggle,
+    .profile-menu-item {
+        transition: none !important;
+    }
+
+    .app-navbar-compact .navbar-search.open {
+        animation: none !important;
+    }
+
+    .nav-register-btn:hover {
+        transform: none !important;
+    }
 }

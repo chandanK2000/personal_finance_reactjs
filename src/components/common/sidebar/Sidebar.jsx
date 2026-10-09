@@ -1,125 +1,135 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import {
+    FaWallet,
     FaHome,
     FaUsers,
     FaMoneyBillWave,
     FaReceipt,
     FaChartBar,
-    FaUser,
-    FaSignOutAlt
+    FaBell,
+    FaStickyNote,
 } from "react-icons/fa";
 
 import "./Sidebar.css";
 
-const Sidebar = ({ role = "USER" }) => {
-
-    const navigate = useNavigate();
-
-    const isAdmin = role === "ADMIN";
-
-    const handleLogout = () => {
-
-        // Remove login information
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("userDetails");
-
-        // Go to home page
-        navigate("/");
+const Sidebar = ({ role, isOpen = false, onClose = () => {} }) => {
+    /* ---------- Read user role ---------- */
+    const getStoredUser = () => {
+        try {
+            return JSON.parse(localStorage.getItem("userDetails") || "{}");
+        } catch {
+            return {};
+        }
     };
 
+    const storedUser = getStoredUser();
+
+    const userRole = String(
+        role ??
+            storedUser.role ??
+            storedUser.roleName ??
+            storedUser.RoleName ??
+            (storedUser.role_id === 1 ? "ADMIN" : "") ??
+            "USER"
+    ).toUpperCase();
+
+    const isAdmin = userRole === "ADMIN" || userRole === "1";
+
+    const menuItems = [
+        { title: "Dashboard", path: "/dashboard", icon: FaHome },
+        { title: "Money In / Out", path: "/money", icon: FaMoneyBillWave },
+        { title: "Expenses", path: "/expenses", icon: FaReceipt },
+        { title: "Reports", path: "/reports", icon: FaChartBar },
+        { title: "Reminders", path: "/reminders", icon: FaBell },
+        { title: "Notes", path: "/notes", icon: FaStickyNote },
+    ];
+
     return (
-        <aside className="app-sidebar">
+        <>
+            <aside
+                className={`app-sidebar ${isOpen ? "open" : ""}`}
+                aria-label="Main navigation"
+            >
+                {/* Brand */}
+                <div className="sidebar-header">
+                    <div className="sidebar-brand-icon">
+                        <FaWallet />
+                    </div>
 
-            {/* Sidebar Header */}
-            <div className="sidebar-header">
-                <h5>💰 Personal Finance</h5>
-            </div>
+                    <div className="sidebar-brand-text">
+                        <h5>Personal Finance</h5>
+                        <span>Manage your money</span>
+                    </div>
+                </div>
 
-            {/* Navigation */}
-            <Nav className="sidebar-nav flex-column">
+                {/* Main menu */}
+                <div className="sidebar-section-label">MAIN MENU</div>
 
-                {/* Dashboard */}
-                <Nav.Link
-                    as={NavLink}
-                    to="/dashboard"
-                    className="sidebar-link"
-                >
-                    <FaHome className="sidebar-icon" />
-                    <span>Dashboard</span>
-                </Nav.Link>
+                <Nav className="sidebar-nav flex-column">
+                    {menuItems.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                            <Nav.Link
+                                key={item.path}
+                                as={NavLink}
+                                to={item.path}
+                                end={item.path === "/dashboard"}
+                                className="sidebar-link"
+                                onClick={onClose}
+                                title={item.title}
+                            >
+                                <Icon className="sidebar-icon" />
+                                <span>{item.title}</span>
+                            </Nav.Link>
+                        );
+                    })}
 
-                {/* Admin Only */}
-                {isAdmin && (
-                    <Nav.Link
-                        as={NavLink}
-                        to="/admin/users"
-                        className="sidebar-link"
-                    >
-                        <FaUsers className="sidebar-icon" />
-                        <span>User Management</span>
-                    </Nav.Link>
-                )}
+                    {/* Admin-only */}
+                    {isAdmin && (
+                        <>
+                            <div
+                                className="sidebar-divider"
+                                aria-hidden="true"
+                            />
 
-                {/* Money In / Out */}
-                <Nav.Link
-                    as={NavLink}
-                    to="/money"
-                    className="sidebar-link"
-                >
-                    <FaMoneyBillWave className="sidebar-icon" />
-                    <span>Money In / Out</span>
-                </Nav.Link>
+                            <div className="sidebar-section-label admin-label">
+                                ADMINISTRATION
+                            </div>
 
-                {/* Expenses */}
-                <Nav.Link
-                    as={NavLink}
-                    to="/expenses"
-                    className="sidebar-link"
-                >
-                    <FaReceipt className="sidebar-icon" />
-                    <span>Expenses</span>
-                </Nav.Link>
+                            <Nav.Link
+                                as={NavLink}
+                                to="/admin/users"
+                                className="sidebar-link"
+                                onClick={onClose}
+                                title="User Management"
+                            >
+                                <FaUsers className="sidebar-icon" />
+                                <span>User Management</span>
+                            </Nav.Link>
+                        </>
+                    )}
+                </Nav>
 
-                {/* Reports */}
-                <Nav.Link
-                    as={NavLink}
-                    to="/reports"
-                    className="sidebar-link"
-                >
-                    <FaChartBar className="sidebar-icon" />
-                    <span>Reports</span>
-                </Nav.Link>
+                {/* Footer */}
+                <div className="sidebar-bottom">
+                    <div className="sidebar-footer">
+                        Personal Finance © 2026
+                    </div>
+                </div>
+            </aside>
 
-                {/* Profile */}
-                <Nav.Link
-                    as={NavLink}
-                    to="/profile"
-                    className="sidebar-link"
-                >
-                    <FaUser className="sidebar-icon" />
-                    <span>Profile</span>
-                </Nav.Link>
-
-            </Nav>
-
-            {/* Logout */}
-            <div className="sidebar-bottom">
-
-                <button
-                    type="button"
-                    className="sidebar-logout"
-                    onClick={handleLogout}
-                >
-                    <FaSignOutAlt className="sidebar-icon" />
-                    <span>Logout</span>
-                </button>
-
-            </div>
-
-        </aside>
+            {/* Backdrop — only on mobile/tablet when open */}
+            {isOpen && (
+                <div
+                    className="sidebar-backdrop"
+                    onClick={onClose}
+                    aria-hidden="true"
+                />
+            )}
+        </>
     );
 };
 

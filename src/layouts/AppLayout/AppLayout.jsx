@@ -1,30 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import Navbar from "../../components/common/navbar/Navbar";
 import Sidebar from "../../components/common/sidebar/Sidebar";
-import Footer from "../../components/common/footer/Footer";
 
 import "./AppLayout.css";
 
-const AppLayout = ({ role = "USER" }) => {
+const AppLayout = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const handleMenuClick = () => setSidebarOpen(true);
+    const handleSidebarClose = () => setSidebarOpen(false);
+
     return (
         <div className="app-layout">
-
-            <Navbar />
+            <Sidebar isOpen={sidebarOpen} onClose={handleSidebarClose} />
 
             <div className="app-layout-body">
-
-                <Sidebar role={role} />
+                <Navbar hideBrand onMenuClick={handleMenuClick} />
 
                 <main className="app-content">
                     <Outlet />
                 </main>
-
             </div>
-
-            <Footer />
-
         </div>
     );
 };

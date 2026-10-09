@@ -1,17 +1,69 @@
+/* =============================================================
+   APP LAYOUT — ROOT
+   ============================================================= */
+
 .app-layout {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: #f7f9fc;
 }
+
+/* =============================================================
+   BODY — SITS BESIDE THE FIXED SIDEBAR (250px)
+   ============================================================= */
 
 .app-layout-body {
-    flex: 1;
+    flex: 1 1 auto;
+
     display: flex;
-    min-height: 0;
+    flex-direction: column;
+
+    min-height: 100vh;
+
+    /* Push everything to the right of the fixed sidebar */
+    margin-left: 250px;
+
+    transition: margin-left 0.25s ease;
 }
 
+/* =============================================================
+   MAIN CONTENT
+   ============================================================= */
+
 .app-content {
-    flex: 1;
+    flex: 1 1 auto;
     padding: 24px;
-    overflow-y: auto;
+    background: #f7f9fc;
+}
+
+/* =============================================================
+   RESPONSIVE — matches Sidebar breakpoints
+   ============================================================= */
+
+@media (max-width: 991.98px) {
+    /* Sidebar becomes a slide-in overlay — no offset needed */
+    .app-layout-body {
+        margin-left: 0;
+    }
+
+    .app-content {
+        padding: 18px 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    .app-content {
+        padding: 14px 12px;
+    }
+}
+
+/* =============================================================
+   ACCESSIBILITY
+   ============================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .app-layout-body {
+        transition: none;
+    }
 }

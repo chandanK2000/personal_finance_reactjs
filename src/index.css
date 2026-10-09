@@ -1,3 +1,7 @@
+/* =========================================================
+   GLOBAL BASE  (index.css / App.css)
+   ========================================================= */
+
 html,
 body,
 #root {
@@ -22,4 +26,17 @@ body {
 
 .app-footer {
     flex-shrink: 0;
+}
+
+/* Main content beside the fixed sidebar */
+.main-content {
+    min-height: 100vh;
+    margin-left: 270px;
+    background: #f7f9fc;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 76px;
+    }
 }

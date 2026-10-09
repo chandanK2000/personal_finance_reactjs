@@ -1,40 +1,5 @@
-// import { Routes, Route } from "react-router-dom";
 
-// import Navbar from "./components/common/navbar/Navbar";
-// import Footer from "./components/common/footer/Footer";
-
-// import Home from "./pages/home/Home";
-// import About from "./pages/about/About";
-// import Contact from "./pages/contact/Contact";
-// import Privacy from "./pages/privacy/Privacy";
-// import Terms from "./pages/terms/Terms";
-// import Cookies from "./pages/cookies/Cookies";
-
-// function App() {
-//     return (
-//         <>
-//             <Navbar />
-
-//             <main className="app-main">
-//                 <Routes>
-//                     <Route path="/" element={<Home />} />
-//                     <Route path="/about" element={<About />} />
-//                     <Route path="/contact" element={<Contact />} />
-//                     <Route path="/privacy" element={<Privacy />} />
-//                     <Route path="/terms" element={<Terms />} />
-//                     <Route path="/cookies" element={<Cookies />} />
-//                 </Routes>
-//             </main>
-
-//             <Footer />
-//         </>
-//     );
-// }
-
-// export default App;
-
-
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 
 import Navbar from "./components/common/navbar/Navbar";
 import Footer from "./components/common/footer/Footer";
@@ -49,119 +14,92 @@ import Terms from "./pages/terms/Terms";
 import Cookies from "./pages/cookies/Cookies";
 
 import Dashboard from "./pages/dashboard/Dashboard";
+import Money from "./pages/money/Money";
+import Expenses from "./pages/expenses/Expenses";
+import Reports from "./pages/reports/Reports";
+import Reminders from "./pages/reminders/Reminders";
+import Notes from "./pages/notes/Notes";
+import Profile from "./pages/profile/Profile";
+import Users from "./pages/users/Users";
+import Settings from "./pages/settings/Settings";
+// import Profile from "./pages/profile/Profile";
+// import Users from "./pages/admin/Users";
+
+function PublicLayout() {
+    return (
+        <>
+            <Navbar />
+
+            <main className="app-main">
+                <Outlet />
+            </main>
+
+            <Footer />
+        </>
+    );
+}
 
 function App() {
     return (
         <Routes>
+            {/* PUBLIC PAGES */}
+            <Route element={<PublicLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/cookies" element={<Cookies />} />
+            </Route>
 
-            {/* =========================
-                PUBLIC PAGES
-            ========================== */}
-
-            <Route
-                path="/"
-                element={
-                    <>
-                        <Navbar />
-
-                        <main className="app-main">
-                            <Home />
-                        </main>
-
-                        <Footer />
-                    </>
-                }
-            />
-
-            <Route
-                path="/about"
-                element={
-                    <>
-                        <Navbar />
-
-                        <main className="app-main">
-                            <About />
-                        </main>
-
-                        <Footer />
-                    </>
-                }
-            />
-
-            <Route
-                path="/contact"
-                element={
-                    <>
-                        <Navbar />
-
-                        <main className="app-main">
-                            <Contact />
-                        </main>
-
-                        <Footer />
-                    </>
-                }
-            />
-
-            <Route
-                path="/privacy"
-                element={
-                    <>
-                        <Navbar />
-
-                        <main className="app-main">
-                            <Privacy />
-                        </main>
-
-                        <Footer />
-                    </>
-                }
-            />
-
-            <Route
-                path="/terms"
-                element={
-                    <>
-                        <Navbar />
-
-                        <main className="app-main">
-                            <Terms />
-                        </main>
-
-                        <Footer />
-                    </>
-                }
-            />
-
-            <Route
-                path="/cookies"
-                element={
-                    <>
-                        <Navbar />
-
-                        <main className="app-main">
-                            <Cookies />
-                        </main>
-
-                        <Footer />
-                    </>
-                }
-            />
-
-
-            {/* =========================
-                AUTHENTICATED APP
-            ========================== */}
-
-            <Route element={<AppLayout role="USER" />}>
-
+            {/* AUTHENTICATED APPLICATION */}
+            <Route element={<AppLayout />}>
                 <Route
                     path="/dashboard"
                     element={<Dashboard />}
                 />
 
-            </Route>
+                <Route
+                    path="/money"
+                    element={<Money />}
+                />
 
+                <Route
+                    path="/expenses"
+                    element={<Expenses />}
+                />
+
+                <Route
+                    path="/reports"
+                    element={<Reports />}
+                />
+
+                <Route
+                    path="/reminders"
+                    element={<Reminders />}
+                />
+
+                <Route
+                    path="/notes"
+                    element={<Notes />}
+                />
+ 
+                <Route
+                    path="/profile"
+                    element={<Profile />}
+                /> 
+
+                  <Route
+                    path="/settings"
+                    element={<Settings />}
+                /> 
+
+                {/* ADMIN PAGE */}
+                 <Route
+                    path="/admin/users"
+                    element={<Users />}
+                /> 
+            </Route>
         </Routes>
     );
 }
