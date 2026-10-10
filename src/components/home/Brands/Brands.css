@@ -1,0 +1,38 @@
+.brands-section {
+    padding: 2.5rem 0;
+    background: #ffffff;
+    border-bottom: 1px solid var(--pf-border);
+}
+
+.brands-label {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #aab2c2;
+    margin-bottom: 1.25rem;
+}
+
+.brands-track {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem 3rem;
+}
+
+.brand-item {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #c3cad8;
+    letter-spacing: -0.3px;
+    transition: color var(--pf-transition), transform var(--pf-transition);
+}
+
+.brand-item:hover { color: var(--pf-primary); transform: translateY(-2px); }
+
+@media (max-width: 767.98px) {
+    .brands-track { gap: 1rem 1.75rem; }
+    .brand-item { font-size: 1rem; }
+}

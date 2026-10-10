@@ -325,7 +325,6 @@ function Navbar({ hideBrand = false, onMenuClick = () => {} }) {
                 expand="lg"
                 className="app-navbar"
                 collapseOnSelect
-                sticky="top"
             >
                 <Container fluid className="navbar-container">
                     <BootstrapNavbar.Brand

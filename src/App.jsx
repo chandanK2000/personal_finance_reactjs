@@ -22,8 +22,8 @@ import Notes from "./pages/notes/Notes";
 import Profile from "./pages/profile/Profile";
 import Users from "./pages/users/Users";
 import Settings from "./pages/settings/Settings";
-// import Profile from "./pages/profile/Profile";
-// import Users from "./pages/admin/Users";
+import ScrollToTop from "./components/ScrollToTop";
+import Documents from "./pages/documents/Documents";
 
 function PublicLayout() {
     return (
@@ -41,6 +41,10 @@ function PublicLayout() {
 
 function App() {
     return (
+        <>
+                    <ScrollToTop />
+
+       
         <Routes>
             {/* PUBLIC PAGES */}
             <Route element={<PublicLayout />}>
@@ -74,6 +78,11 @@ function App() {
                     element={<Reports />}
                 />
 
+                  <Route
+                    path="/documents"
+                    element={<Documents />}
+                />
+
                 <Route
                     path="/reminders"
                     element={<Reminders />}
@@ -101,6 +110,7 @@ function App() {
                 /> 
             </Route>
         </Routes>
+         </>
     );
 }
 

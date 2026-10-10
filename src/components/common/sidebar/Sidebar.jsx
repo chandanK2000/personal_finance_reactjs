@@ -11,6 +11,7 @@ import {
     FaChartBar,
     FaBell,
     FaStickyNote,
+    FaFolderOpen,
 } from "react-icons/fa";
 
 import "./Sidebar.css";
@@ -43,6 +44,7 @@ const Sidebar = ({ role, isOpen = false, onClose = () => {} }) => {
         { title: "Money In / Out", path: "/money", icon: FaMoneyBillWave },
         { title: "Expenses", path: "/expenses", icon: FaReceipt },
         { title: "Reports", path: "/reports", icon: FaChartBar },
+        { title: "Documents", path: "/documents", icon: FaFolderOpen },
         { title: "Reminders", path: "/reminders", icon: FaBell },
         { title: "Notes", path: "/notes", icon: FaStickyNote },
     ];
@@ -65,8 +67,7 @@ const Sidebar = ({ role, isOpen = false, onClose = () => {} }) => {
                     </div>
                 </div>
 
-                {/* Main menu */}
-                <div className="sidebar-section-label">MAIN MENU</div>
+                
 
                 <Nav className="sidebar-nav flex-column">
                     {menuItems.map((item) => {
