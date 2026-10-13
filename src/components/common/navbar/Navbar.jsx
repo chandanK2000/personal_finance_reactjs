@@ -106,11 +106,19 @@ function Navbar({ hideBrand = false, onMenuClick = () => {} }) {
 
     /* ---------- Handlers ---------- */
     const handleLogout = () => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("userDetails");
-        setIsLoggedIn(false);
-        setUserDetails(null);
-        navigate("/");
+
+            const confirmLogout = window.confirm("Are you sure you want to logout?");
+
+           if (!confirmLogout) return;
+
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userDetails");
+
+    setIsLoggedIn(false);
+    setUserDetails(null);
+
+    navigate("/");
+
     };
 
     const handleSearchSubmit = (e) => {

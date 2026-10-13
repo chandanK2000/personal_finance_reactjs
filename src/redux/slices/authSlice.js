@@ -1,9 +1,21 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
+const getSavedUser = () => {
+    try {
+        const savedUser = localStorage.getItem("userDetails");
+        return savedUser ? JSON.parse(savedUser) : null;
+    } catch (error) {
+        console.error("Failed to restore user details:", error);
+        return null;
+    }
+};
+
 const initialState = {
-    user: null,
-    isAuthenticated: false,
+    user: getSavedUser(),
+    isAuthenticated: Boolean(
+        localStorage.getItem("accessToken") && getSavedUser()
+    ),
 };
 
 const authSlice = createSlice({
@@ -19,6 +31,9 @@ const authSlice = createSlice({
         logout: (state) => {
             state.user = null;
             state.isAuthenticated = false;
+
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("userDetails");
         },
     },
 });

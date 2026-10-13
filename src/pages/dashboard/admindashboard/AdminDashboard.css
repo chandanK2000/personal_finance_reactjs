@@ -1,0 +1,112 @@
+/* AdminDashboard.css */
+.ad-wrapper {
+  max-width: 1200px;
+}
+
+.ad-loading {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ad-header h4 {
+  font-weight: 700;
+  color: #212529;
+}
+
+/* Stat cards */
+.ad-stat-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ad-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.ad-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  margin-bottom: 0.35rem;
+}
+
+.ad-stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+/* Users card */
+.ad-users-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.ad-users-card .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 0.75rem 1rem;
+}
+
+.ad-search {
+  max-width: 300px;
+}
+
+/* Table */
+.ad-table {
+  font-size: 0.875rem;
+}
+
+.ad-table thead th {
+  background-color: #f8f9fa;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #6c757d;
+  font-weight: 600;
+  border-bottom: 1px solid #e9ecef;
+  white-space: nowrap;
+}
+
+.ad-table tbody td {
+  vertical-align: middle;
+  padding: 0.6rem 0.75rem;
+}
+
+.ad-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .ad-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ad-header .d-flex {
+    justify-content: flex-end;
+  }
+
+  .ad-search {
+    max-width: 100%;
+    width: 100%;
+  }
+}
